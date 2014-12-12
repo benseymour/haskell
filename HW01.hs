@@ -30,8 +30,7 @@ toDigits int
 
 -- Doubles every other number from the right
 doubleEveryOther :: [Integer] -> [Integer]
+doubleEveryOther [] = []
 doubleEveryOther ltd
-		| length revltd == 0				= []
-		| length revltd `mod` 2 == 1 		= doubleEveryOther (tail ltd) ++ head ltd : []
-		| length revltd `mod` 2 == 0		= doubleEveryOther (tail ltd) ++ (head ltd) * 2 : []
-		where revltd = reverse ltd
+		| length ltd `mod` 2 == 1 		= head ltd : doubleEveryOther (tail ltd)
+		| length ltd `mod` 2 == 0		= (head ltd) * 2 : doubleEveryOther (tail ltd)
