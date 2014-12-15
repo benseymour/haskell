@@ -34,3 +34,14 @@ doubleEveryOther [] = []
 doubleEveryOther ltd
 		| length ltd `mod` 2 == 1 		= head ltd : doubleEveryOther (tail ltd)
 		| length ltd `mod` 2 == 0		= (head ltd) * 2 : doubleEveryOther (tail ltd)
+
+-- Adds all digits in array together
+sumDigits :: [Integer] -> Integer
+sumDigits [] = 0
+sumDigits x = sumDigitsInInt (head x) + sumDigits (tail x)
+
+
+sumDigitsInInt :: Integer -> Integer
+sumDigitsInInt n
+		| n < 1 = 0
+		| otherwise = lastDigit n + sumDigitsInInt(dropLastDigit n)
