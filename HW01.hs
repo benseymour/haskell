@@ -45,3 +45,16 @@ sumDigitsInInt :: Integer -> Integer
 sumDigitsInInt n
 		| n < 1 = 0
 		| otherwise = lastDigit n + sumDigitsInInt(dropLastDigit n)
+
+
+validate :: Integer -> Bool
+validate cardNum
+		| lastDigit (sumDigits (doubleEveryOther (toDigits (cardNum)))) == 0 	= True
+		| otherwise 															= False
+
+
+{-
+type Peg = String
+type Move = (Peg,Peg)
+hanoi :: Integer -> Peg -> Peg -> Peg [Move]
+-}
