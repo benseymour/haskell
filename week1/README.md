@@ -5,6 +5,7 @@ Haskell home work for the work fp group.
 
 The course we will be following
 http://www.seas.upenn.edu/~cis194/lectures.html
+http://www.seas.upenn.edu/~cis194/fall14/lectures.html
 
 Download Haskell for your platform
 https://www.haskell.org/platform/
