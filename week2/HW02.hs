@@ -34,7 +34,14 @@ type STemplate = Template
 
 -- Write your code below:
 formableBy :: String -> Hand -> Bool
-formableBy = undefined
+formableBy [] _ = True
+formableBy (w:ws) hnd
+	| w `notElem` hnd = False
+	| w `elem` hnd = formableBy ws (delete w hnd)
+
 
 wordsFrom :: Hand -> [String]
 wordsFrom hand = filter (`formableBy` hand) allWords
+
+wordFitsTemplate :: Template -> Hand -> String -> Bool
+wordFitsTemplate = undefined
