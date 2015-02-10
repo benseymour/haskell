@@ -51,3 +51,6 @@ wordFitsTemplate (t:ts) hn (wr:wrs)
 	| (wr `notElem` hn && wr /= t) 	= False
 	| wr == t 						= wordFitsTemplate ts hn wrs
 	| wr `elem` hn 					= wordFitsTemplate ts (delete wr hn) wrs
+
+wordsFittingTemplate :: Template -> Hand -> [String]
+wordsFittingTemplate = undefined
