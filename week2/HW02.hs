@@ -57,5 +57,10 @@ wordsFittingTemplate tmp hnd = filter (wordFitsTemplate tmp hnd) allWords
 --wordsFittingTemplate tmp hnd = filter (`wordFitsTemplate` tmp hnd) allWords
 
 scrabbleValueWord :: String -> Int
-scrabbleValueWord = undefined
+scrabbleValueWord [] = 0
+scrabbleValueWord (s:ss) = scrabbleValue s + scrabbleValueWord ss
+
+bestWords :: [String] -> [String]
+bestWords = undefined
+
 
