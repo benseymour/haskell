@@ -48,9 +48,9 @@ wordFitsTemplate [] _ [] = True
 wordFitsTemplate [] _ _ = False
 wordFitsTemplate _ _ [] = False
 wordFitsTemplate (t:ts) hn (wr:wrs)
-	| (wr `notElem` hn && wr /= t) 	= False
 	| wr == t 						= wordFitsTemplate ts hn wrs
-	| wr `elem` hn 					= wordFitsTemplate ts (delete wr hn) wrs
+	| wr `elem` hn && t == '?'		= wordFitsTemplate ts (delete wr hn) wrs
+	| otherwise = False
 
 wordsFittingTemplate :: Template -> Hand -> [String]
 wordsFittingTemplate tmp hnd = filter (wordFitsTemplate tmp hnd) allWords
@@ -61,6 +61,17 @@ scrabbleValueWord [] = 0
 scrabbleValueWord (s:ss) = scrabbleValue s + scrabbleValueWord ss
 
 bestWords :: [String] -> [String]
-bestWords = undefined
+bestWords pos = bestWords' (maximum(bestWords'' pos)) (bestWords'' pos) pos
 
+-- helper which does scrabbleValueWord onto words and puts them in a list
+bestWords'' :: [String] -> [Int]
+bestWords'' [] = []
+bestWords'' (wrd:wrds) = scrabbleValueWord wrd : [] ++ bestWords'' wrds 
+
+-- accumulator
+bestWords' :: Int -> [Int] -> [String] -> [String]
+bestWords' maxi [] [] = []
+bestWords' maxi (x:xs) (y:ys)
+	| x == maxi = bestWords' maxi xs ys ++ y : []
+	| otherwise = bestWords' maxi xs ys
 
