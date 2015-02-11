@@ -53,4 +53,9 @@ wordFitsTemplate (t:ts) hn (wr:wrs)
 	| wr `elem` hn 					= wordFitsTemplate ts (delete wr hn) wrs
 
 wordsFittingTemplate :: Template -> Hand -> [String]
-wordsFittingTemplate = undefined
+wordsFittingTemplate tmp hnd = filter (wordFitsTemplate tmp hnd) allWords
+--wordsFittingTemplate tmp hnd = filter (`wordFitsTemplate` tmp hnd) allWords
+
+scrabbleValueWord :: String -> Int
+scrabbleValueWord = undefined
+
