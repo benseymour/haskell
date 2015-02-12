@@ -75,3 +75,20 @@ bestWords' maxi (x:xs) (y:ys)
 	| x == maxi = bestWords' maxi xs ys ++ y : []
 	| otherwise = bestWords' maxi xs ys
 
+scrabbleValueTemplate :: STemplate -> String -> Int
+scrabbleValueTemplate sTemp word = (scrabbleValueTemplate'' sTemp 1) * (scrabbleValueTemplate' sTemp word)
+
+scrabbleValueTemplate' :: STemplate -> String -> Int
+scrabbleValueTemplate' [] [] = 0
+scrabbleValueTemplate' (t:ts) (s:ss)
+	| t == 'D' = (scrabbleValue s * 2) + scrabbleValueTemplate' ts ss
+	| t == 'T' = (scrabbleValue s * 3) + scrabbleValueTemplate' ts ss
+	| otherwise = scrabbleValue s + scrabbleValueTemplate' ts ss
+
+scrabbleValueTemplate'' :: STemplate -> Int -> Int
+scrabbleValueTemplate'' [] multi = multi
+scrabbleValueTemplate'' (tp:tps) multi
+	| tp == '2' = scrabbleValueTemplate'' tps (multi * 2)
+	| tp == '3' = scrabbleValueTemplate'' tps (multi * 3)
+	| otherwise = scrabbleValueTemplate'' tps multi
+
